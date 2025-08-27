@@ -1,5 +1,7 @@
 package com.example.demo.pojo;
+import lombok.Data;
 
+@Data
 public class Result<T> {
     private int code;
     private String msg;

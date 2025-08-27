@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 public class StudentController {
@@ -19,9 +21,9 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/getStudent/{id}")
-    public Student getStudent(@PathVariable Long id)
+    public Result<Student> getStudent(@PathVariable Integer id)
     {
-        return studentService.getStudent(id);
+        return Result.success(studentService.getStudent(id));
     }
 
     // insert a new student
@@ -33,4 +35,28 @@ public class StudentController {
         return Result.success(null);
     }
 
+    // delete a student 批量删除
+    @DeleteMapping("/deleteStudent/{ids}")
+    public Result<Void> deleteStudent(@PathVariable List<Integer> ids)
+    {
+        log.info("deleteStudent: {}", ids);
+        studentService.deleteStudent(ids);
+        return Result.success(null);
+    }
+
+    // update a student
+    @PutMapping("/updateStudent")
+    public Result<Student> updateStudent(@RequestBody Student student)
+    {
+        log.info("updateStudent: {}", student);
+        studentService.updateStudent(student);
+        return Result.success(null);
+    }
+
+    // get students
+    @GetMapping("/getStudentList")
+    public Result<List<Student>> getStudentList() {
+        List<Student> studentList = studentService.getStudentList();
+        return Result.success(studentList);
+    }
 }
