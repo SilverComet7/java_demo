@@ -4,6 +4,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.Result;
 import com.example.demo.pojo.Student;
 import com.example.demo.service.StudentService;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,6 @@ import java.util.List;
 @RestController
 @Slf4j
 public class StudentController {
-    private final Logger log = LoggerFactory.getLogger(StudentController.class);
 
     @Autowired
     private StudentService studentService;
@@ -23,7 +23,8 @@ public class StudentController {
     @GetMapping("/getStudent/{id}")
     public Result<Student> getStudent(@PathVariable Integer id)
     {
-        return Result.success(studentService.getStudent(id));
+        Student student = studentService.getStudent(id);
+        return Result.success(student);
     }
 
     // insert a new student
@@ -55,8 +56,8 @@ public class StudentController {
 
     // get students
     @GetMapping("/getStudentList")
-    public Result<List<Student>> getStudentList() {
-        List<Student> studentList = studentService.getStudentList();
+    public Result<PageInfo<Student>> getStudentList(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize, @RequestParam(required = false) String name, @RequestParam(required = false) Integer age) {
+        PageInfo<Student> studentList = studentService.getStudentList(pageNum, pageSize, name, age);
         return Result.success(studentList);
     }
 }

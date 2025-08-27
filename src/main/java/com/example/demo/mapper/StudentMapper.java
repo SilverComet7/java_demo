@@ -1,19 +1,15 @@
-package com.example.demo.dao;
+package com.example.demo.mapper;
 
 import com.example.demo.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Mapper
-public interface StudentRepositoryDao  {
-    List<Student> findAll();
+public interface StudentMapper {
     Student findById(int id);
     void save(Student student);
     void deleteAllById(List<Integer> ids);
     void update(Student student);
+    List<Student> findAll(String name, Integer age);
 }

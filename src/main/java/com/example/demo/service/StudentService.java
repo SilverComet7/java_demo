@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.pojo.Student;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface StudentService {
 
     void updateStudent(Student student);
 
-    List<Student> getStudentList();
+    PageInfo<Student> getStudentList(Integer pageNum, Integer pageSize, String name, Integer age);
 }
