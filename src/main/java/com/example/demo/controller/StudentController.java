@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@RequestMapping("/api")
 public class StudentController {
-    private static final Logger log = LoggerFactory.getLogger(StudentController.class);
+    private final Logger log = LoggerFactory.getLogger(StudentController.class);
+
     @Autowired
     private StudentService studentService;
 
@@ -26,11 +26,11 @@ public class StudentController {
 
     // insert a new student
     @PostMapping("/insertStudent")
-    public String insertStudent(@RequestBody Student student)
+    public Result<Student> insertStudent(@RequestBody Student student)
     {
         log.info("insertStudent: {}", student);
-//        Student newStudent = studentService.insertStudent(student);
-        return Result.success(1).toString();
+        studentService.insertStudent(student);
+        return Result.success(null);
     }
 
 }

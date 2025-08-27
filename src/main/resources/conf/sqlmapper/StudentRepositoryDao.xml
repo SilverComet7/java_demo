@@ -4,7 +4,7 @@
     <select id="findById"  resultType="com.example.demo.pojo.Student">
         select * from Student where id = #{id}
     </select>
-    <insert id="save" parameterType="com.example.demo.pojo.Student">
+    <insert id="saveStudent" parameterType="com.example.demo.pojo.Student">
         insert into Student (name, age) values (#{name}, #{age})
     </insert>
     <update id="update" parameterType="com.example.demo.pojo.Student">

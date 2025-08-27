@@ -18,7 +18,7 @@ public class Result<T> {
     }
 
     // error
-    public Result<T> error(int code, String msg) {
+    public static <T> Result<T> error(int code, String msg) {
         return new Result<>(code, msg, null);
     }
 }
